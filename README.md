@@ -161,7 +161,8 @@ Some examples in the directory `priv/example/`.
 - Attach to path:  set system environment variables  `export EMQX_PLUGIN_KAFKA_CONF="absolute_path"`
 
 
-![1111111](https://github.com/caijinpeng1113/emqx_plugin_kafka/assets/158483689/2adb3532-13cc-4090-895a-1d1c8c28ae84)
+
+![1111111](https://github.com/caijinpeng1113/emqx_plugin_kafka/assets/158483689/9cbd8283-a60b-4365-8767-4ec282cc530e)
 
 
 
