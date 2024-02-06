@@ -1,0 +1,11 @@
+{application, emqx_plugin_kafka,
+    [{description, "EMQX kafka plugin."},
+        {vsn, "0.1.0"},
+        {modules, []},
+        {registered, [emqx_plugin_kafka_sup]},
+        {applications, [kernel, stdlib, wolff]},
+        {mod, {emqx_plugin_kafka_app, []}},
+        {env, []},
+        {licenses, ["Apache-2.0"]},
+        {maintainers, [""]}
+    ]}.

@@ -1,0 +1,32 @@
+plugin_kafka {
+  connection {
+    bootstrap_hosts = ["10.3.64.223:9192", "10.3.64.223:9292", "10.3.64.223:9392"]
+    sasl {
+      mechanism = plain
+      username = "username"
+      password = "password"
+    }
+  }
+
+  hooks = [
+    {endpoint = client.connect}
+    , {endpoint = client.connack}
+    , {endpoint = client.connected}
+    , {endpoint = client.disconnected}
+    , {endpoint = client.authenticate}
+    , {endpoint = client.authorize}
+    , {endpoint = client.authenticate}
+    , {endpoint = client.check_authz_complete}
+    , {endpoint = session.created}
+    , {endpoint = session.subscribed}
+    , {endpoint = session.unsubscribed}
+    , {endpoint = session.resumed}
+    , {endpoint = session.discarded}
+    , {endpoint = session.takenover}
+    , {endpoint = session.terminated}
+    , {endpoint = message.publish, filter = "test/#"}
+    , {endpoint = message.delivered, filter = "test/#"}
+    , {endpoint = message.acked, filter = "test/#"}
+    , {endpoint = message.dropped, filter = "test/#"}
+  ]
+}
