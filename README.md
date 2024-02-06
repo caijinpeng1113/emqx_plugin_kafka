@@ -5,7 +5,7 @@ Kafka plugin for EMQX >= V5.4.0，支持EMQX转Kafka配置SASL/PLAIN模式。
 ## Usage
 
 ### Build the EMQX broker
-* 先安装相关依赖组件，本文基于RockyLinux 8.5 环境，通过dnf方式安装
+* 先安装相关依赖组件，本文基于RockyLinux 8.5 环境，通过dnf方式安装。（注意：编译环境GCC必要高于4.8.5 ）
 ```shell
 dnf -y install gcc gcc-c++ cpp glibc  glibc-devel glibc-headers kernel-devel kernel-headers cmake make m4 ncurses ncurses-devel openssl openssl-devel openssl-libs zlib zlib-devel libselinux-devel xmlto perl git wget zip unzip gtk2-devel binutils-devel unixODBC unixODBC-devel libtool  libtool-ltdl-devel  wxWidgets bzip2 binutils-devel
 ```
@@ -85,7 +85,7 @@ _build/default/emqx_plugrel/emqx_plugin_kafka-<vsn>.tar.gz
 
 ### Config
 
-#### 将编译后emqx_plugin_kafka插件包，通过EMQX的插件进行安装。
+#### 将编译后emqx_plugin_kafka插件包，通过EMQX的插件管理页面，进行安装。 （请先确保Kafka服务是正常）
 #### 在EMQX的目录下，增加配置文件，如下： `emqx/etc/emqx_plugin_kafka.hocon` ，然后进行启动。
 
 ```shell
