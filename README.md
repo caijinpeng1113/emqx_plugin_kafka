@@ -6,13 +6,18 @@ Kafka plugin for EMQX >= V5.4.0，支持EMQX转Kafka配置SASL/PLAIN模式。
 
 ### Build the EMQX broker
 * 先安装相关依赖组件，本文基于RockyLinux 8.5 环境，通过dnf方式安装。（注意：编译环境GCC必要高于4.8.5 ）
+
 ```shell
 dnf -y install gcc gcc-c++ cpp glibc  glibc-devel glibc-headers kernel-devel kernel-headers cmake make m4 ncurses ncurses-devel openssl openssl-devel openssl-libs zlib zlib-devel libselinux-devel xmlto perl git wget zip unzip gtk2-devel binutils-devel unixODBC unixODBC-devel libtool  libtool-ltdl-devel  wxWidgets bzip2 binutils-devel
 ```
 
+
 * 安装Erlang/OTP   ( emqx v5.4.0 安装 25.2.2 )
 
 ```
+下载地址
+https://www.erlang.org/patches/otp-25.2.2 
+
 解压 Erlang
 tar xvf  otp_src_25.2.2.tar.gz 
  
@@ -40,9 +45,13 @@ erl
 
 ```
 
+
 * 安装 Rebar3    (  rebar3 安装 3.20.0 )
 
 ```
+下载地址：
+https://github.com/erlang/rebar3/archive/refs/tags/3.20.0.tar.gz 
+
 解压：  
 tar -xvf  rebar3-3.20.0.tar.gz 
 
@@ -65,6 +74,7 @@ rebar3 -v
 rebar3 hex
 ```
 
+
 * 编译EMQX Broker
 
 ```
@@ -80,8 +90,10 @@ rebar3 hex
 > git clone https://github.com/caijinpeng1113/emqx_plugin_kafka.git
 > cd emqx_plugin_kafka
 > make rel
+
 _build/default/emqx_plugrel/emqx_plugin_kafka-<vsn>.tar.gz
 ```
+
 
 ### Config
 
