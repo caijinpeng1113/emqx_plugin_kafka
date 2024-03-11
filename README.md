@@ -84,21 +84,22 @@ rebar3 hex
 
 
 
-### Release
+### 下载EMQX的Kafka插件源码并编译
 
 ```shell
-> git clone https://github.com/caijinpeng1113/emqx_plugin_kafka.git
-> cd emqx_plugin_kafka
-> make rel
+> 下载Kafka插件的源码： git clone https://github.com/caijinpeng1113/emqx_plugin_kafka.git
+> 进入目录： cd emqx_plugin_kafka
+> 执行编译Kafka插件的命令： make rel
 
+在对应的源码目录下，生成编译后插件包，如下：
 _build/default/emqx_plugrel/emqx_plugin_kafka-<vsn>.tar.gz
 ```
 
 
-### Config
+### 启动EMQX并配置Kafka插件
 
-#### 将编译后emqx_plugin_kafka插件包，通过EMQX的插件管理页面，进行安装。 （请先确保Kafka服务是正常）
-#### 在EMQX的目录下，增加配置文件，如下： `emqx/etc/emqx_plugin_kafka.hocon` ，然后进行启动。
+* 启动EMQX服务，然后将编译后emqx_plugin_kafka插件包，通过EMQX的插件管理页面，进行安装插件。 （请先确保Kafka服务是正常）
+* 在EMQX的目录下，增加配置文件，如下： `emqx/etc/emqx_plugin_kafka.hocon` ，然后进行再启动Kafka插件。
 
 ```shell
 plugin_kafka {
