@@ -99,8 +99,8 @@ _build/default/emqx_plugrel/emqx_plugin_kafka-<vsn>.tar.gz
 ### 启动EMQX并配置Kafka插件
 
 * 启动EMQX服务，然后将编译后emqx_plugin_kafka插件包，通过EMQX的插件管理页面，进行安装Kafka插件。（先不要启动Kafka插件）
-* 在EMQX的目录下，增加配置文件(如：emqx-v5.4.0/_build/emqx/rel/emqx/etc/emqx_plugin_kafka.hocon) ，配置文件内容如下，然后进行再启动Kafka插件。
-  （注意: 在启动Kafka插件之前，先检查Kafka的地址和用户密码是否正确，相关topic是否已创建）
+* 在EMQX服务中，检查 emqx-v5.4.0/_build/emqx/rel/emqx/etc/ 目录下，是否存在 emqx_plugin_kafka.hocon 文件（如果此文件不存在，需要新建），配置文件内容如下，然后进行再启动Kafka插件。
+  （注意: 检查Kafka的地址和用户密码是否正确，相关topic是否已创建）
 
 ```shell
 plugin_kafka {
