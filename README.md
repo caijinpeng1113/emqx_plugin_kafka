@@ -5,24 +5,25 @@ Kafka plugin for EMQX >= V5.4.0，支持EMQX转Kafka配置SASL/PLAIN模式。
 ## Usage
 
 ### Build the EMQX broker
-* 先安装相关依赖组件，本文基于RockyLinux 8.5 环境，通过dnf方式安装。（注意：编译环境GCC必要高于4.8.5 ）
+* 本文中内容，在RockyLinux 8.5 和 RockyLinux 9.2 中环境下，已经验证过。
 
+* 先安装相关依赖组件，通过dnf方式安装。
 ```shell
-dnf -y install gcc gcc-c++ cpp glibc  glibc-devel glibc-headers kernel-devel kernel-headers cmake make m4 ncurses ncurses-devel openssl openssl-devel openssl-libs zlib zlib-devel libselinux-devel xmlto perl git wget zip unzip gtk2-devel binutils-devel unixODBC unixODBC-devel libtool  libtool-ltdl-devel  wxWidgets bzip2 binutils-devel
+dnf -y install gcc gcc-c++ cpp glibc  glibc-devel glibc-headers kernel-devel kernel-headers cmake make m4 ncurses ncurses-devel openssl openssl-devel openssl-libs zlib zlib-devel libselinux-devel xmlto perl git wget zip unzip gtk2-devel binutils-devel unixODBC libtool wxWidgets bzip2 binutils-devel  
 ```
 
 
-* 安装Erlang/OTP   ( emqx v5.4.0 安装 25.2.2 )
+* 安装Erlang/OTP   ( emqx v5.4.0 安装 25.3.2.5 )
 
 ```
 下载地址
-https://www.erlang.org/patches/otp-25.2.2 
+https://www.erlang.org/patches/otp-25.3.2.5 
 
 解压 Erlang
-tar xvf  otp_src_25.2.2.tar.gz 
+tar xvf  otp_src_25.3.2.5.tar.gz
  
 进入解压目录
-cd /opt/otp_src_25.2.2
+cd otp_src_25.3.2.5
 
 编译  
 ./configure --prefix=/usr/local/erlang --with-ssl --enable-threads --enable-smp-support --enable-kernel-poll --enable-hipe --without-javac
@@ -64,9 +65,13 @@ cd rebar3-3.20.0
 ./bootstrap
 ./rebar3 local install
 
-添加到PATH
+添加到PATH，修改环境变量
 vi ~/.bashrc
+
+将以下内容存储至文件中，保存并退出
 export PATH=$PATH:~/.cache/rebar3/bin
+
+使环境变量刷新并生效
 source ~/.bashrc   
 
 验证版本 
@@ -104,8 +109,17 @@ _build/default/emqx_plugrel/emqx_plugin_kafka-<vsn>.tar.gz
 
 ```shell
 plugin_kafka {
+  // required
   connection {
+    // Kafka address.
     bootstrap_hosts = ["10.3.64.223:9192", "10.3.64.223:9292", "10.3.64.223:9392"]
+
+    // enum: per_partition | per_broker
+    // optional   default:per_partition
+    connection_strategy = per_partition
+    // optional   default:5s
+    min_metadata_refresh_interval = 5s
+
     sasl {
       // enum:  plain | scram_sha_256 | scram_sha_512
       mechanism = plain
@@ -116,8 +130,24 @@ plugin_kafka {
       enable = false
     }
   }
-  
-  // create kafka topic mqtt_data and emqx_test
+
+  // optional
+  producer {
+    // Most number of bytes to collect into a produce request.
+    // optional   default:896KB
+    max_batch_bytes = 896KB
+    // enum:  no_compression | snappy | gzip
+    // optional   default:no_compression
+    compression = no_compression
+    // enum:  random | roundrobin | first_key_dispatch
+    // optional   default:random
+    partition_strategy = random
+
+    // enum:  plain | base64
+    encode_payload_type = plain
+  }
+
+  // create kafka topic [mqtt_data] and [emqx_test]
   hooks = [
     {endpoint = client.connect}
     , {endpoint = client.connack}
