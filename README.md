@@ -5,15 +5,15 @@ Kafka plugin for EMQX V5.4 版本，支持EMQX转Kafka配置SASL/PLAIN模式。
 ## Usage
 
 ### Build the EMQX broker
-* 本文中内容，在RockyLinux 8.5 和 RockyLinux 9.2 中环境下，已经验证过。
+* 本文中内容，在操作系统 RockyLinux 8.5 和 RockyLinux 9.2 中，已经分别验证过； 理论上兼容RHEL8 和 RHEL9的操作系统，都是可以。
 
-* 先安装相关依赖组件，通过dnf方式安装。
+* 在服务器上，先安装相关依赖组件，通过dnf方式安装，如下：
 ```shell
 dnf -y install gcc gcc-c++ cpp glibc  glibc-devel glibc-headers kernel-devel kernel-headers cmake make m4 ncurses ncurses-devel openssl openssl-devel openssl-libs zlib zlib-devel libselinux-devel xmlto perl git wget zip unzip gtk2-devel binutils-devel unixODBC libtool wxWidgets bzip2 binutils-devel  
 ```
 
 
-* 安装Erlang/OTP   ( emqx v5.4.0 安装 25.3.2.5 )
+* 在服务器上，安装Erlang/OTP   ( emqx v5.4 安装 Erlang/OTP 的版本 25.3.2.5 )
 
 ```
 下载地址
@@ -47,19 +47,19 @@ erl
 ```
 
 
-* 安装 Rebar3    (  rebar3 安装 3.20.0 )
+* 在服务器上，安装 Rebar3 ( rebar3 的版本 3.20.0 )
 
 ```
 下载地址：
 https://github.com/erlang/rebar3/archive/refs/tags/3.20.0.tar.gz 
 
-解压：  
+解压 Rebar3：  
 tar -xvf  rebar3-3.20.0.tar.gz 
 
 进入解压目录
 cd rebar3-3.20.0
 
-修改 rebar3/rebar.config,  文件末尾添加 {plugins, [rebar3_hex]}.
+修改rebar3中 rebar.config 文件,  在文件末尾添加 {plugins, [rebar3_hex]}.  
 
 编译
 ./bootstrap
@@ -105,14 +105,14 @@ _build/default/emqx_plugrel/emqx_plugin_kafka-<vsn>.tar.gz
 
 * 启动EMQX服务，然后将编译后emqx_plugin_kafka插件包，通过EMQX的插件管理页面，进行安装Kafka插件。（先不要启动Kafka插件）
 * 在EMQX服务中，检查 emqx-v5.4.0/_build/emqx/rel/emqx/etc/ 目录下，是否存在 emqx_plugin_kafka.hocon 文件（如果此文件不存在，需要新建），配置文件内容如下，然后进行再启动Kafka插件。
-  （注意: 检查Kafka的地址和用户密码是否正确，相关topic是否已创建）
+  （注意: 检查Kafka的地址和用户密码是否正确，相关topic是否已创建，如：mqtt_data和emqx_test ）
 
 ```shell
 plugin_kafka {
   // required
   connection {
     // Kafka address.
-    bootstrap_hosts = ["10.3.64.223:9192", "10.3.64.223:9292", "10.3.64.223:9392"]
+    bootstrap_hosts = ["10.3.64.220:9192", "10.3.64.221:9292", "10.3.64.222:9392"]
 
     // enum: per_partition | per_broker
     // optional   default:per_partition
