@@ -1,6 +1,6 @@
 # emqx_plugin_kafka
 
-Kafka plugin for EMQX >= V5.4.0，支持EMQX转Kafka配置SASL/PLAIN模式。
+Kafka plugin for EMQX V5.4 版本，支持EMQX转Kafka配置SASL/PLAIN模式。
 
 ## Usage
 
