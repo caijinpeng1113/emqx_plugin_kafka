@@ -13,17 +13,17 @@ dnf -y install gcc gcc-c++ cpp glibc  glibc-devel glibc-headers kernel-devel ker
 ```
 
 
-* 在服务器上，安装Erlang/OTP   ( emqx v5.4 安装 Erlang/OTP 的版本 25.3.2.5 )
+* 在服务器上，安装Erlang/OTP   ( emqx v5.4 安装 Erlang/OTP 的版本 25.3.2.10 )
 
 ```
 下载地址
-https://www.erlang.org/patches/otp-25.3.2.5 
+https://www.erlang.org/patches/otp-25.3.2.10 
 
 解压 Erlang
-tar xvf  otp_src_25.3.2.5.tar.gz
+tar xvf  otp_src_25.3.2.10.tar.gz
  
 进入解压目录
-cd otp_src_25.3.2.5
+cd otp_src_25.3.2.10
 
 编译  
 ./configure --prefix=/usr/local/erlang --with-ssl --enable-threads --enable-smp-support --enable-kernel-poll --enable-hipe --without-javac
@@ -47,17 +47,17 @@ erl
 ```
 
 
-* 在服务器上，安装 Rebar3 ( rebar3 的版本 3.20.0 )
+* 在服务器上，安装 Rebar3 ( rebar3 的版本 3.22.0 )
 
 ```
 下载地址：
-https://github.com/erlang/rebar3/archive/refs/tags/3.20.0.tar.gz 
+https://github.com/erlang/rebar3/archive/refs/tags/3.22.0.tar.gz 
 
 解压 Rebar3：  
-tar -xvf  rebar3-3.20.0.tar.gz 
+tar -xvf  rebar3-3.22.0.tar.gz 
 
 进入解压目录
-cd rebar3-3.20.0
+cd rebar3-3.22.0
 
 修改rebar3中 rebar.config 文件,  在文件末尾添加 {plugins, [rebar3_hex]}.  
 
